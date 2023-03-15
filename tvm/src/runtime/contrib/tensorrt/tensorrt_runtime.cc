@@ -63,7 +63,7 @@ class TensorRTRuntime : public JSONRuntimeBase {
   explicit TensorRTRuntime(const std::string& symbol_name, const std::string& graph_json,
                            const Array<String>& const_names)
       : JSONRuntimeBase(symbol_name, graph_json, const_names),
-        use_implicit_batch_(true),
+        use_implicit_batch_(false),
         max_workspace_size_(size_t(1) << 30) {}
 
   /*!

@@ -51,7 +51,7 @@ struct TensorRTCompilerConfigNode : public tvm::AttrsNode<TensorRTCompilerConfig
     TVM_ATTR_FIELD(tensorrt_version)
         .describe("TensorRT version as (major, minor, patch).")
         .set_default(Array<Integer>({6, 0, 1}));
-    TVM_ATTR_FIELD(use_implicit_batch).set_default(true);
+    TVM_ATTR_FIELD(use_implicit_batch).set_default(false);
     TVM_ATTR_FIELD(max_workspace_size).set_default(size_t(1) << 30);
     TVM_ATTR_FIELD(remove_no_mac_subgraphs).set_default(false);
   }

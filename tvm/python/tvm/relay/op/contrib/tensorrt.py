@@ -64,7 +64,7 @@ def get_tensorrt_use_implicit_batch_mode():
         "PassContext has no relay.ext.tensorrt.options config, using default value "
         "use_implicit_batch=True."
     )
-    return True
+    return False
 
 
 def get_tensorrt_remove_no_mac_subgraphs():

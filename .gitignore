@@ -241,5 +241,3 @@ cmake-build-debug-fleet
 !tvm/3rdparty
 
 # backend placement
-*.pdf
-*.gv

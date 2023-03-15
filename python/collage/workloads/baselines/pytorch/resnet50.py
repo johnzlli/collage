@@ -1,4 +1,5 @@
 import torch
+from torchvision.models import resnet
 import argparse
 import onnx
 import onnxruntime
@@ -12,7 +13,6 @@ from tvm import te
 import numpy as np
 import tvm.contrib.graph_executor as runtime
 from tvm.relay import testing
-from torchvision.models import resnet
 
 torch.backends.cudnn.benchmark = True
 

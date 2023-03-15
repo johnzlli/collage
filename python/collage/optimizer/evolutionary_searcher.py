@@ -198,12 +198,20 @@ class EvolutionarySearcher:
             # mean_perf, std_perf = measure_end_to_end_user_defined(self.mod["main"], self.params, self.shape_dict,
             #                                                       self.target_str,
             #                                                       self.net_name, self.hw_name, self.batch_size)
-            mean_perf, std_perf = self.measure_subprocess()
+            cnt = 0
+            best_mean_perf, best_std_perf = 999999999, 0
+            while cnt < 5:
+                tmp_mean_perf, tmp_std_perf = self.measure_subprocess()
+                cnt += 1
+                best_std_perf = tmp_std_perf if tmp_mean_perf < best_mean_perf else best_std_perf
+                best_mean_perf = tmp_mean_perf if tmp_mean_perf < best_mean_perf else best_mean_perf
+            mean_perf = best_mean_perf
+            std_perf = best_std_perf
         # self._memo_state[individual_hash] = -mean_perf
 
         # Deallocate opt_match
         del opt_match
-        logging.info(f"Measurement time : {time.time()-measure_start_time:.2f}s")
+        logging.info(f"Measurement time : {time.time()-measure_start_time:.2f}s with mean_perf: {mean_perf} std_perf: {std_perf}")
         return -mean_perf,
         # return sum(individual),
 

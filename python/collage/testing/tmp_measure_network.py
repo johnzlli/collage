@@ -1,5 +1,5 @@
-from collage.optimizer.custom_fusion_pass import measure_end_to_end_user_defined
 from workloads.torch_workloads import get_network_from_torch
+from collage.optimizer.custom_fusion_pass import measure_end_to_end_user_defined
 
 import sys
 

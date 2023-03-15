@@ -128,7 +128,6 @@ if __name__ == "__main__":
                       do_constant_folding=False,
                       input_names=input_names, output_names=output_names,
                       training = torch.onnx.TrainingMode.TRAINING,
-                      example_outputs=torch.randn(( 64, 1024)),
                       opset_version=12)
     onnx_model = onnx.load(f"models/{NAME}.onnx")
 

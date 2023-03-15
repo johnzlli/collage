@@ -1,4 +1,7 @@
 import torch
+import torchvision.models as models
+import torch.autograd.profiler as profiler
+from torch.nn.parameter import Parameter
 import argparse
 import numpy as np
 import time 
@@ -12,8 +15,6 @@ import torch
 import argparse
 import onnx
 import onnxruntime
-import torchvision.models as models
-import torch.autograd.profiler as profiler
 import tvm.relay.op
 from tqdm import tqdm 
 from tvm import relay
@@ -22,7 +23,6 @@ from tvm import te
 import numpy as np
 import tvm.contrib.graph_executor as runtime
 from tvm.relay import testing
-from torch.nn.parameter import Parameter
 
 torch.backends.cudnn.benchmark = True
 

@@ -1,4 +1,9 @@
 import torch
+from torchvision.models import resnet
+import torch.nn as nn
+from torch.nn.parameter import Parameter
+import torch.nn.functional as F
+from torch import Tensor 
 import argparse
 import onnx
 import onnxruntime
@@ -12,12 +17,7 @@ from tvm import te
 import numpy as np
 import tvm.contrib.graph_executor as runtime
 from tvm.relay import testing
-from torchvision.models import resnet
-import torch.nn as nn
-from torch.nn.parameter import Parameter
-import torch.nn.functional as F
 from typing import Tuple, Optional
-from torch import Tensor 
 
 torch.backends.cudnn.benchmark = True
 

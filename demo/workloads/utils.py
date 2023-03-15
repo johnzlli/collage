@@ -47,6 +47,7 @@ import tvm.relay.testing as testing
 # Key is network name and batch size
 # Value is shape dict
 WORKLOADS_DIC = {
+    "matmul": {1: {"input0": [64, 1024]}},
     "resnet_block" : {1: {"input0": [1, 64, 56, 56]},
                       8: {"input0": [8, 64, 56, 56]},
                       16: {"input0": [16, 64, 56, 56]}},

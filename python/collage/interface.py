@@ -269,11 +269,9 @@ class Module:
         net = net.with_attr("BatchSize", batch_size)
         net = net.with_attr("BackendList", ",".join(backends))
 
-        
-
         ev_pop_size = kwargs["ev_pop_size"] if "ev_pop_size" in kwargs else 50
-        ev_max_iter = kwargs["ev_max_iter"] if "ev_pop_size" in kwargs else 100000
-        ev_budget = kwargs["ev_budget"] if "ev_budget" in kwargs else 0.3
+        ev_max_iter = kwargs["ev_max_iter"] if "ev_pop_size" in kwargs else 100
+        ev_budget = kwargs["ev_budget"] if "ev_budget" in kwargs else 10
 
         autotvm_tuning_log = self.pattern_registry.backend_registry["autotvm"].kwargs["tuning_log"]
         # Optimize
@@ -318,8 +316,8 @@ class Module:
         autotvm_tuning_log = self.pattern_registry.backend_registry["autotvm"].kwargs["tuning_log"]
 
         ev_pop_size = kwargs["ev_pop_size"] if "ev_pop_size" in kwargs else 50
-        ev_max_iter = kwargs["ev_max_iter"] if "ev_pop_size" in kwargs else 100000
-        ev_budget = kwargs["ev_budget"] if "ev_budget" in kwargs else 0.3
+        ev_max_iter = kwargs["ev_max_iter"] if "ev_pop_size" in kwargs else 100
+        ev_budget = kwargs["ev_budget"] if "ev_budget" in kwargs else 10
 
         # Optimize
         with CollageContext(

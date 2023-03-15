@@ -1,12 +1,13 @@
-from tvm import relay
 import torch
 import os
 import copy
 import logging
 import numpy as np
+from tvm import relay
 
 if __name__ == '__main__':
     from utils import WORKLOADS_DIC
+    from baselines.pytroch.matmul import MATMUL
     from baselines.pytorch.resnets import resnet50, resnext50_32x4d, resnet_block
     from baselines.pytorch.nasnet_a import NASNetA
     from baselines.pytorch.nasrnn import NASRNN
@@ -19,6 +20,7 @@ if __name__ == '__main__':
     from baselines.pytorch.gpt2 import get_gpt2_model
 else:
     from .utils import WORKLOADS_DIC
+    from .baselines.pytroch.matmul import MATMUL
     from .baselines.pytorch.resnets import resnet50, resnext50_32x4d, resnet_block
     from .baselines.pytorch.nasnet_a import NASNetA
     from .baselines.pytorch.nasrnn import NASRNN
@@ -31,6 +33,7 @@ else:
     from .baselines.pytorch.gpt2 import get_gpt2_model
 
 NETWORK_TO_TORCH_MODEL = {
+    "matmul": MATMUL,
     "resnet_block": resnet_block,
     "resnet50" : resnet50,
     "resnext50_32x4d" : resnext50_32x4d,
