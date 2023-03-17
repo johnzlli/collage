@@ -1,85 +1,47 @@
-# <img src=https://github.com/cmu-catalyst/collage/blob/main/Collage%20logo.png width="100" height="100"> Collage
-System for automated integration of deep learning backends. 
+<!--- Licensed to the Apache Software Foundation (ASF) under one -->
+<!--- or more contributor license agreements.  See the NOTICE file -->
+<!--- distributed with this work for additional information -->
+<!--- regarding copyright ownership.  The ASF licenses this file -->
+<!--- to you under the Apache License, Version 2.0 (the -->
+<!--- "License"); you may not use this file except in compliance -->
+<!--- with the License.  You may obtain a copy of the License at -->
 
-# Installation
-Since our implementation uses TVM as the main code generator, install tvm under `tvm/`.
-1. Install dependencies
-```
-sudo apt-get update
-sudo apt-get install -y python3 python3-dev python3-setuptools gcc libtinfo-dev zlib1g-dev build-essential cmake libedit-dev libxml2-dev
-```
-```
-pip3 install --user numpy decorator attrs tornado psutil xgboost cloudpickle pytest
-```
+<!---   http://www.apache.org/licenses/LICENSE-2.0 -->
 
-2. Install backends (e.g., cuDNN, MKL,...). 
-* For cuDNN, install [front-end library](https://github.com/NVIDIA/cudnn-frontend) (commit 360d6e7164dfb7c802493fd1c0464f0d815b852a, tag: v0.1)
+<!--- Unless required by applicable law or agreed to in writing, -->
+<!--- software distributed under the License is distributed on an -->
+<!--- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY -->
+<!--- KIND, either express or implied.  See the License for the -->
+<!--- specific language governing permissions and limitations -->
+<!--- under the License. -->
 
+<img src=https://raw.githubusercontent.com/apache/tvm-site/main/images/logo/tvm-logo-small.png width=128/> Open Deep Learning Compiler Stack
+==============================================
+[Documentation](https://tvm.apache.org/docs) |
+[Contributors](CONTRIBUTORS.md) |
+[Community](https://tvm.apache.org/community) |
+[Release Notes](NEWS.md)
 
-3. Create build directory and go to build directory
-```
-mkdir tvm/build && cd tvm/build
-```
-4. Prepare `cmake` configuration file. Make sure backend libaries of interest are built together. We provide cmake config that we used for our GPU/CPU experiments (`config.cmake.gpu`, `config.cmake.cpu`) in `tvm/cmake/`. Users may copy it to their build directory and rename it to `config.cmake`
- ```
- cp ../cmake/config.cmake.gpu config.cmake
- ```
-5. Run `cmake` and `make`
-```
-cmake .. && make -j$(nproc)
-```
-6. Declare following environment variables
-```
-export COLLAGE_HOME=/path/to/collage/repo
-export COLLAGE_TVM_HOME=${COLLAGE_HOME}/tvm
-export PYTHONPATH=${COLLAGE_TVM_HOME}/python:${COLLAGE_HOME}/python:${PYTHONPATH}
-```
+[![Build Status](https://ci.tlcpack.ai/buildStatus/icon?job=tvm/main)](https://ci.tlcpack.ai/job/tvm/job/main/)
+[![WinMacBuild](https://github.com/apache/tvm/workflows/WinMacBuild/badge.svg)](https://github.com/apache/tvm/actions?query=workflow%3AWinMacBuild)
 
-For more details, please reference [TVM installation guide](https://tvm.apache.org/docs/install/index.html)
+Apache TVM is a compiler stack for deep learning systems. It is designed to close the gap between the
+productivity-focused deep learning frameworks, and the performance- and efficiency-focused hardware backends.
+TVM works with deep learning frameworks to provide end to end compilation to different backends.
 
-7. Install Collage dependencies
-```
-pip3 install --user graphviz bitarray deap pandas
-```
-If you face issues, try
-```
-pip3 install --upgrade protobuf
-sudo apt-get install graphviz
-```
+License
+-------
+© Contributors Licensed under an [Apache-2.0](LICENSE) license.
 
+Contribute to TVM
+-----------------
+TVM adopts apache committer model, we aim to create an open source project that is maintained and owned by the community.
+Check out the [Contributor Guide](https://tvm.apache.org/docs/contribute/).
 
-# Demo
-Install the following dependencies for deep learning models used for demo.
-```
-pip3 install --user torch==1.7.1 torchvision==0.8.2 tqdm protobuf onnx onnxruntime opencv-python transformers
-```
-
-We provide two demos (`demo_performance.py`, `demo_customization.py`) under `demo/`. 
-* `demo_performance.py` shows how collage optimizes given workloads with popular backends that Collage provides by default.
-* `demo_customization.py` shows how users can register new backend with their custom codegen, pattern, pattern rule.
-
-For the best result, it is highly recommend to create the tuning log by using `autotune_tvm_ops.py` before running those demos.
-
-
-# Note
-* As Collage uses TVM as its code generator, it cannot support backends that TVM is unable to build. Tested backends are
-  * TVM w/o tuning
-  * TVM w/ AutoTVM
-  * cuDNN v8.0.5
-  * cuBLAS v11.3.0
-  * TensorRT v7.2.2
-  * MKL 
-  * DNNL
-* Since Collage is essentially a profile-guided search, variance in the measurement may affect the final backend placement. For the best result, multiple runs are highly recommended. 
-* Due to some issues in the implementation, current evolutionary search only supports network implemented in `get_network_from_torch()`. If an user want to try new network, the network must be implemented within this function.
-
-
-# Cite
-```
-@article{jeon2021collage,
-  title={Collage: Automated Integration of Deep Learning Backends},
-  author={Jeon, Byungsoo and Park, Sunghyun and Liao, Peiyuan and Xu, Sheng and Chen, Tianqi and Jia, Zhihao},
-  journal={arXiv preprint arXiv:2111.00655},
-  year={2021}
-}
-```
+Acknowledgement
+---------------
+We learned a lot from the following projects when building TVM.
+- [Halide](https://github.com/halide/Halide): Part of TVM's TIR and arithmetic simplification module
+  originates from Halide. We also learned and adapted some part of lowering pipeline from Halide.
+- [Loopy](https://github.com/inducer/loopy): use of integer set analysis and its loop transformation primitives.
+- [Theano](https://github.com/Theano/Theano): the design inspiration of symbolic scan operator for recurrence.
